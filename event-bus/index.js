@@ -16,5 +16,10 @@ app.post("/events", (req,res)=>{
     axios.post("http://localhost:4002/events",event);
 
 
+    res.send({status:'OK'})
 
+});
+
+app.listen(4005,()=>{
+    console.log("listening on 4005");
 })
