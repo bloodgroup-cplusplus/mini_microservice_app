@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser=require("body-parser")
 const{randomBytes} = require("crypto")
 const cors = require("cors")
+const axios = require("axios");
 
 
 
@@ -30,6 +31,19 @@ app.post("/posts/:id/comments",(req,res)=>{
     comments.push({id:commentId,content});
 
     commentsByPostId[req.params.id] = comments;
+
+    axios.post("http://localhost:4005/events",{
+        type:"CommentCreated",
+        data:{
+            id:commentId,
+            content,
+
+
+        }
+
+
+
+    })
 
     // send back entire array of comments
     res.status(201).send(comments);
