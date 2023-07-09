@@ -22,7 +22,7 @@ app.post("/posts/:id/comments",(req,res)=>{
 
     const {content} = req.body
 
-    const comments= commentdByPostId[req.params.id] || [];
+    const comments= commentsByPostId[req.params.id] || [];
     // if we never have a comment we have c
 
     comments.push({id:commentId,content});
