@@ -21,7 +21,7 @@ app.post("/posts", (req,res)=> {
     const{title} = req.body 
     posts[id] = {
         id,
-        titile
+        title
     };
 
     res.status(201).send(posts[id]);
@@ -29,6 +29,7 @@ app.post("/posts", (req,res)=> {
 });
 
 
-app.listen(4000,()=>{
+app.listen(4000,(req,res)=>{
     console.log("listening on 4000");
+
 });
