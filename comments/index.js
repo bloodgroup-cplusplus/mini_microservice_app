@@ -18,7 +18,7 @@ app.get("/posts/:id/comments",(req,res)=>{
 });
 
 
-app.post("/posts/:id/comments",(req,res)=>{
+app.post("/posts/:id/comments",async(req,res)=>{
     // in memory data structure
     const commentId= randomBytes(4).toString("hex");
     // we will pull out the content property 
@@ -32,11 +32,12 @@ app.post("/posts/:id/comments",(req,res)=>{
 
     commentsByPostId[req.params.id] = comments;
 
-    axios.post("http://localhost:4005/events",{
+    await axios.post("http://localhost:4005/events",{
         type:"CommentCreated",
         data:{
             id:commentId,
             content,
+            postId:req.params.id
 
 
         }
