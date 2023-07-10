@@ -5,7 +5,6 @@ const cors = require("cors")
 const axios = require("axios");
 
 
-
 const app = express()
 app.use(bodyParser.json());
 app.use(cors());
@@ -26,7 +25,7 @@ app.post("/posts/:id/comments",async(req,res)=>{
     const {content} = req.body
 
     const comments= commentsByPostId[req.params.id] || [];
-    // if we never have a comment we have c
+    // if we never have a comment we have empty list
 
     comments.push({id:commentId,content});
 
@@ -37,18 +36,21 @@ app.post("/posts/:id/comments",async(req,res)=>{
         data:{
             id:commentId,
             content,
-            postId:req.params.id
+            postId:req.params.id,
 
 
-        }
+        },
 
-
-
-    })
+    });
 
     // send back entire array of comments
     res.status(201).send(comments);
 
+});
+
+app.post("/events", (req,res)=>{
+    console.log("Event Received:",req.body.type);
+    res.send({});
 })
 
 
